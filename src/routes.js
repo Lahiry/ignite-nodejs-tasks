@@ -64,7 +64,9 @@ export const routes = [
             const [task] = database.select('tasks', { id })
 
             if (!task) {
-                return res.writeHead(404).end()
+                return res.writeHead(404).end(
+                    JSON.stringify({ message: 'Non-existent task' })
+                )
             }
 
             database.update('tasks', id, { title, description, updated_at: new Date() })
